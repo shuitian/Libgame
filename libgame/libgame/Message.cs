@@ -9,7 +9,7 @@ namespace UnityTool.Libgame
 
     }
 
-    public class MessageManager<TEventArgs>
+    class MessageManager<TEventArgs>
     {
         static Dictionary<string, MessageHandle<TEventArgs>> handles = new Dictionary<string, MessageHandle<TEventArgs>>();
 
