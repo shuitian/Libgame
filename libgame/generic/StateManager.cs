@@ -38,6 +38,7 @@ namespace UnityTool.Libgame
                 {
                     states[stateMachineName + newStateName].OnEnter();
                 }
+                currentStateNames[stateMachineName] = newStateName;
             }
             else
             {
@@ -49,7 +50,8 @@ namespace UnityTool.Libgame
 
         static public void Update()
         {
-            foreach(KeyValuePair<string, string> stateName in currentStateNames)
+            Dictionary<string, string> currentStateNames1 = new Dictionary<string, string>(currentStateNames);
+            foreach (KeyValuePair<string, string> stateName in currentStateNames1)
             {
                 if (states.ContainsKey(stateName.Key + stateName.Value))
                 {
