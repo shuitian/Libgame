@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace UnityTool.Libgame
 {
@@ -10,15 +11,64 @@ namespace UnityTool.Libgame
         //<State Machine Name||Current State Name, Class State>
         static Dictionary<string, State> states = new Dictionary<string, State>();
 
-        static public void ChangeState(string stateMachineName, State newState)
+        public static void Init()
         {
-            ChangeState(stateMachineName, newState.stateName, newState.onEnter, newState.onExcute, newState.onExit);
+            if (Runtime.StateManager.Instance() == null)
+            {
+                GameObject obj = new GameObject("StateManager");
+                obj.AddComponent< Runtime.StateManager> ();
+            }
         }
+        static public void RegediStateCallBack(string stateMachineName, string stateName, StateCallBackType type, StateHandle handle)
+        {
+            Init();
+            if (!states.ContainsKey(stateMachineName + stateName))
+            {
+                states.Add(stateMachineName + stateName, new State(stateName));
+            }
+            if(type == StateCallBackType.TypeOnEnter)
+            {
+                states[stateMachineName + stateName].onEnter += handle;
+            }
+            else if (type == StateCallBackType.TypeOnExcute)
+            {
+                states[stateMachineName + stateName].onExcute += handle;
+
+            }
+            else if (type == StateCallBackType.TypeOnExit)
+            {
+                states[stateMachineName + stateName].onExit += handle;
+            }
+        }
+
+        static public void UnregediStateCallBack(string stateMachineName, string stateName, StateCallBackType type, StateHandle handle)
+        {
+            Init();
+            if (!states.ContainsKey(stateMachineName + stateName))
+            {
+                return;
+            }
+            if (type == StateCallBackType.TypeOnEnter)
+            {
+                states[stateMachineName + stateName].onEnter += handle;
+            }
+            else if (type == StateCallBackType.TypeOnExcute)
+            {
+                states[stateMachineName + stateName].onExcute += handle;
+
+            }
+            else if (type == StateCallBackType.TypeOnExit)
+            {
+                states[stateMachineName + stateName].onExit += handle;
+            }
+        }
+
         static public void ChangeState(string stateMachineName, string newStateName)
         {
-            ChangeState(stateMachineName, newStateName, null, null, null);
+            Init();
+            _ChangeState(stateMachineName, newStateName, null, null, null);
         }
-        static void ChangeState(string stateMachineName, string newStateName, StateHandle onEnter = null, StateHandle onExcute = null, StateHandle onExit = null)
+        static void _ChangeState(string stateMachineName, string newStateName, StateHandle onEnter = null, StateHandle onExcute = null, StateHandle onExit = null)
         {
             if (currentStateNames.ContainsKey(stateMachineName))
             {
@@ -30,26 +80,25 @@ namespace UnityTool.Libgame
                 {
                     states[stateMachineName + currentStateNames[stateMachineName]].OnExit();
                 }
-                if (!states.ContainsKey(stateMachineName + newStateName))
-                {
-                    states.Add(stateMachineName + newStateName, new State(newStateName, onEnter, onExcute, onExit));
-                }
-                if (states[stateMachineName + newStateName] != null)
-                {
-                    states[stateMachineName + newStateName].OnEnter();
-                }
                 currentStateNames[stateMachineName] = newStateName;
             }
             else
             {
                 currentStateNames.Add(stateMachineName, newStateName);
-                states.Add(stateMachineName + newStateName, new State(newStateName, onEnter, onExcute, onExit));
+            }
+            if (!states.ContainsKey(stateMachineName + newStateName))
+            {
+                states.Add(stateMachineName + newStateName, new State(newStateName));
+            }
+            if (states[stateMachineName + newStateName] != null)
+            {
                 states[stateMachineName + newStateName].OnEnter();
             }
         }
 
         static public void Update()
         {
+            Init();
             Dictionary<string, string> currentStateNames1 = new Dictionary<string, string>(currentStateNames);
             foreach (KeyValuePair<string, string> stateName in currentStateNames1)
             {
@@ -62,6 +111,13 @@ namespace UnityTool.Libgame
                 }
             }
         }
+    }
+
+    public enum StateCallBackType
+    {
+        TypeOnEnter,
+        TypeOnExcute,
+        TypeOnExit,
     }
 
     public delegate void StateHandle(String stateName);
@@ -111,9 +167,30 @@ namespace UnityTool.Libgame.Runtime
 {
     public class StateManager : UnityEngine.MonoBehaviour
     {
+        static StateManager _stateManager;
+        void Awake()
+        {
+            _stateManager = this;
+        }        
+        static public StateManager Instance()
+        {
+            if (_stateManager && _stateManager.enabled)
+            {
+                return _stateManager;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        
         void Update()
         {
-            Libgame.StateMachine.Update();
+            if (Instance() == this)
+            {
+                Libgame.StateMachine.Update();
+            }
         }
     }
 }

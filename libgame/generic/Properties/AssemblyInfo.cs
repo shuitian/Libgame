@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // 有关程序集的一般信息由以下
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("libgame")]
+[assembly: AssemblyTitle("generic")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("微软中国")]
-[assembly: AssemblyProduct("libgame")]
-[assembly: AssemblyCopyright("Copyright © 微软中国 2015")]
+[assembly: AssemblyProduct("generic")]
+[assembly: AssemblyCopyright("Copyright © 微软中国 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 如果此项目向 COM 公开，则下列 GUID 用于类型库的 ID
-[assembly: Guid("73cfff32-b5d0-41a1-820f-0427f5e5e03f")]
+[assembly: Guid("4db7229d-dd77-4147-8a61-41259391dd76")]
 
 // 程序集的版本信息由下列四个值组成: 
 //
