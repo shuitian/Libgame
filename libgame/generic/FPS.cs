@@ -42,4 +42,12 @@ namespace UnityTool.Libgame.Runtime
             FPS = Libgame.FPS.GetFPS(updateInterval);
         }
     }
+
+    public class LibDontDestroyOnLoad : MonoBehaviour
+    {
+        void Awake()
+        {
+            DontDestroyOnLoad(gameObject);
+        }
+    }
 }

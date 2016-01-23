@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace UnityTool.Libgame
 {
-    public class Time
+    public class LibTime
     {
         static float savedTimeScale;
 

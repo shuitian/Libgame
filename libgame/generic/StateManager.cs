@@ -11,6 +11,35 @@ namespace UnityTool.Libgame
         //<State Machine Name||Current State Name, Class State>
         static Dictionary<string, State> states = new Dictionary<string, State>();
 
+        public static bool IsCurrentState(string stateMachineName, string stateName)
+        {
+            if (currentStateNames.ContainsKey(stateMachineName) && currentStateNames[stateMachineName] == stateName)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        static public void Clear()
+        {
+            //<State Machine Name, Current State Name>
+            currentStateNames = new Dictionary<string, string>();
+            //<State Machine Name||Current State Name, Class State>
+            states = new Dictionary<string, State>();
+        }
+
+        public static string GetCurrentStateName(string stateMachineName)
+        {
+            if (currentStateNames.ContainsKey(stateMachineName))
+            {
+                return currentStateNames[stateMachineName];
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         public static void Init()
         {
             if (Runtime.StateManager.Instance() == null)
@@ -43,7 +72,6 @@ namespace UnityTool.Libgame
 
         static public void UnregediStateCallBack(string stateMachineName, string stateName, StateCallBackType type, StateHandle handle)
         {
-            Init();
             if (!states.ContainsKey(stateMachineName + stateName))
             {
                 return;
@@ -171,7 +199,12 @@ namespace UnityTool.Libgame.Runtime
         void Awake()
         {
             _stateManager = this;
-        }        
+        }
+
+        void OnDestroy()
+        {
+            Libgame.StateMachine.Clear();
+        }
         static public StateManager Instance()
         {
             if (_stateManager && _stateManager.enabled)
