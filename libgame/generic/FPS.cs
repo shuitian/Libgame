@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace UnityTool.Libgame
+namespace Libgame
 {
     public class FPS
     {
@@ -29,7 +26,7 @@ namespace UnityTool.Libgame
     }
 }
 
-namespace UnityTool.Libgame.Runtime
+namespace Libgame.Runtime
 {
     public class ShowFPS : MonoBehaviour
     {
@@ -43,7 +40,7 @@ namespace UnityTool.Libgame.Runtime
         }
     }
 
-    public class LibDontDestroyOnLoad : MonoBehaviour
+    public class DontDestroyOnLoad : MonoBehaviour
     {
         void Awake()
         {

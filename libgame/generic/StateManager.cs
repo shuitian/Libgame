@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace UnityTool.Libgame
+namespace Libgame
 {
     public class StateMachine
     {
@@ -191,7 +191,7 @@ namespace UnityTool.Libgame
     }
 }
 
-namespace UnityTool.Libgame.Runtime
+namespace Libgame.Runtime
 {
     public class StateManager : UnityEngine.MonoBehaviour
     {

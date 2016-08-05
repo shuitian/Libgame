@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "log", "log\log.csproj", "{B01ECDBE-2FE4-414D-9CD7-E2AF4231BA05}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "generic", "generic\generic.csproj", "{4DB7229D-DD77-4147-8A61-41259391DD76}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "components", "Components\components.csproj", "{38157D6B-E208-4E9F-8695-37E79B9334DE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{4DB7229D-DD77-4147-8A61-41259391DD76}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4DB7229D-DD77-4147-8A61-41259391DD76}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4DB7229D-DD77-4147-8A61-41259391DD76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38157D6B-E208-4E9F-8695-37E79B9334DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38157D6B-E208-4E9F-8695-37E79B9334DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38157D6B-E208-4E9F-8695-37E79B9334DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38157D6B-E208-4E9F-8695-37E79B9334DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

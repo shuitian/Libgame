@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
-namespace UnityTool.Libgame
+namespace Libgame
 {
     public class LibTime
     {

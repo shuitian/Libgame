@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace UnityTool.Libgame
+namespace Libgame
 {
     public class NONTYPE
     {

@@ -1,4 +1,6 @@
-﻿namespace UnityTool.Libgame
+﻿using UnityEngine;
+
+namespace Libgame
 {
     public class Log
     {

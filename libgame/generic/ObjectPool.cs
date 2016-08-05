@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace UnityTool.Libgame
+namespace Libgame
 {
     public class ObjectPool
     {
