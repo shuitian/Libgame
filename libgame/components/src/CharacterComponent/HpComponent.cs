@@ -15,12 +15,13 @@ namespace Libgame.Runtime.Offline
         {
             ResetHp();
         }
+
         void OnEnable()
         {
             StartCoroutine(RecoverHpPerSecond());
         }
 
-        void OnDestroy()
+        void OnDisable()
         {
             StopAllCoroutines();
         }
@@ -90,7 +91,7 @@ namespace Libgame.Runtime.Offline
             this.hp = 0;
         }
 
-        #region MAX_HP
+#region MAX_HP
         /// <summary>
         /// 基础最大生命值
         /// </summary>
@@ -189,8 +190,8 @@ namespace Libgame.Runtime.Offline
             this.maxHpRate = p_maxHpRate;
             return true;
         }
-        #endregion
-        #region HP_RECOVER
+#endregion
+#region HP_RECOVER
 
         /// <summary>
         /// 基础每秒生命恢复值
@@ -309,6 +310,17 @@ namespace Libgame.Runtime.Offline
             PauseHpRecover();
             StartCoroutine(RecoverHpPerSecond());
         }
-#endregion
+        #endregion
+
+        [ContextMenu("ShowDetail")]
+        public override void ShowDetail()
+        {
+            MonoBehaviour.print(
+                "[" + gameObject + "] => "
+                + "hp: " + hp
+                + ", maxHp: " + maxHp + ", [static]baseMaxHp: " + baseMaxHp + ", maxHpAddedValue: " + maxHpAddedValue + ", maxHpRate: " + maxHpRate
+                + ", [static]minMaxHp: " + minMaxHp + ", [static]maxMaxHp: " + maxMaxHp + ",\n"
+                + "hpRecover: " + hpRecover + ", [static]baseHpRecover: " + baseHpRecover + ", hpRecoverAddedValue: " + hpRecoverAddedValue + ", hpRecoverRate: " + hpRecoverRate);
+        }
     }
 }

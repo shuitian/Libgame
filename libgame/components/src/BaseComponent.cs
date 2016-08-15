@@ -15,4 +15,8 @@ public class BaseComponent : MonoBehaviour {
 	void Update () {
 	
 	}
+
+    public virtual void ShowDetail()
+    {
+    }
 }
