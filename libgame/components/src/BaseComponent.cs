@@ -16,6 +16,9 @@ public class BaseComponent : MonoBehaviour {
 	
 	}
 
+    /// <summary>
+    /// 显示组件的基本信息，虚函数
+    /// </summary>
     public virtual void ShowDetail()
     {
     }

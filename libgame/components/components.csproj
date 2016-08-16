@@ -46,6 +46,8 @@
     <Compile Include="src\BaseComponent.cs" />
     <Compile Include="src\CharacterComponent.cs" />
     <Compile Include="src\CharacterComponent\HpComponent.cs" />
+    <Compile Include="src\CharacterComponent\MoveComponent.cs" />
+    <Compile Include="src\Character\Character.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

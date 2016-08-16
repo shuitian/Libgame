@@ -312,6 +312,9 @@ namespace Libgame.Runtime.Offline
         }
         #endregion
 
+        /// <summary>
+        /// 显示组件的基本信息，虚函数
+        /// </summary>
         [ContextMenu("ShowDetail")]
         public override void ShowDetail()
         {
