@@ -1,21 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-/// <summary>
-/// 单机可运行模块
-/// </summary>
-namespace Libgame.Runtime.Offline
+namespace Libgame
 {
     /// <summary>
-    /// 生命值组件,适用于单机
+    /// 生命值组件
     /// </summary>
     public class HpComponent : CharacterComponent
     {
-        void Awake()
-        {
-            ResetHp();
-        }
-
         void OnEnable()
         {
             StartCoroutine(RecoverHpPerSecond());
@@ -122,7 +114,7 @@ namespace Libgame.Runtime.Offline
         /// <summary>
         /// 最大生命值百分比
         /// </summary>
-        protected float maxHpRate
+        public float maxHpRate
         {
             get { return _maxHpRate; }
             private set { _maxHpRate = value; }
@@ -313,7 +305,7 @@ namespace Libgame.Runtime.Offline
         #endregion
 
         /// <summary>
-        /// 显示组件的基本信息，虚函数
+        /// 显示组件的基本信息，override
         /// </summary>
         [ContextMenu("ShowDetail")]
         public override void ShowDetail()

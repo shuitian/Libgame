@@ -42,10 +42,10 @@ namespace Libgame
 
         public static void Init()
         {
-            if (Runtime.StateManager.Instance() == null)
+            if (StateManager.Instance() == null)
             {
                 GameObject obj = new GameObject("StateManager");
-                obj.AddComponent< Runtime.StateManager> ();
+                obj.AddComponent<StateManager> ();
             }
         }
         static public void RegediStateCallBack(string stateMachineName, string stateName, StateCallBackType type, StateHandle handle)
@@ -189,10 +189,7 @@ namespace Libgame
             }
         }
     }
-}
 
-namespace Libgame.Runtime
-{
     public class StateManager : UnityEngine.MonoBehaviour
     {
         static StateManager _stateManager;

@@ -2,7 +2,7 @@
 
 namespace Libgame
 {
-    public class FPS
+    class FPS
     {
         static float timeleft = 0;
         static int frames = 0;
@@ -24,10 +24,7 @@ namespace Libgame
             return strFPS;
         }
     }
-}
 
-namespace Libgame.Runtime
-{
     public class ShowFPS : MonoBehaviour
     {
 
