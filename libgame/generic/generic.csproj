@@ -42,7 +42,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assert.cs" />
     <Compile Include="FPS.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="ObjectPool.cs" />

@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic ;
+using Libgame.Components;
 
-namespace Libgame
+namespace Libgame.Characters
 {
     /// <summary>
     /// 战斗人物

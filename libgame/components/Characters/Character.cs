@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
-using System.Collections;
-using System.Threading;
+using System;
+using Libgame.Components;
 
-namespace Libgame
+namespace Libgame.Characters
 {
     /// <summary>
     /// 人物
@@ -19,13 +19,12 @@ namespace Libgame
         /// <summary>
         /// 人物姓名
         /// </summary>
-        public string name;
+        public string characterName;
 
         /// <summary>
         /// 人物介绍
         /// </summary>
         public string introduction;
-
 
 
         /// <summary>
@@ -42,11 +41,11 @@ namespace Libgame
             {
                 if (_moveComponent == null)
                 {
-                    _moveComponent = GetComponent<MoveComponent>();
-                    if (_moveComponent == null)
-                    {
-                        _moveComponent = gameObject.AddComponent<MoveComponent>();
-                    }
+                    _moveComponent = GetComponent<MoveComponent>();    
+                }
+                if (_moveComponent == null)
+                {
+                    _moveComponent = gameObject.AddComponent<MoveComponent>();
                 }
                 return _moveComponent;
             }
@@ -56,13 +55,24 @@ namespace Libgame
         {
             Die(this);
         }
-        #region 生死大事
+#region 生死大事
         /// <summary>
         /// 是否已经死亡
         /// </summary>
         [SerializeField]
         protected bool isDead;
 
+        Action<Character> onDie;
+
+        public void AttachDieCallBack(Action<Character> onDie)
+        {
+            this.onDie += onDie;
+        }
+
+        public void DetachDieCallBack(Action<Character> onDie)
+        {
+            this.onDie -= onDie;
+        }
         /// <summary>
         /// 出生，virtual
         /// </summary>
@@ -102,10 +112,11 @@ namespace Libgame
             if (isDead == false)
             {
                 isDead = true;
+                onDie?.Invoke(p_killer);
                 p_killer.Kill(this);
             }
             return isDead;
         }
-        #endregion
+#endregion
     }
 }

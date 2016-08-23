@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-namespace Libgame
+namespace Libgame.Components
 {
     /// <summary>
     /// 移动组件

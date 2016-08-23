@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
-
-namespace Libgame
+﻿namespace Libgame
 {
     /// <summary>
     /// 角色组件，挂载于角色
