@@ -42,6 +42,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\NeverMoveComponent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BaseComponent.cs" />
     <Compile Include="Bridge\HpDieBridge.cs" />

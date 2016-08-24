@@ -27,6 +27,7 @@ namespace Libgame.Bridge
                 return _hpComponent;
             }
         }
+
         private FightCharacter _fightCharacter;
         public FightCharacter fightCharacter
         {
@@ -44,11 +45,19 @@ namespace Libgame.Bridge
             }
         }
 
-        void Awake()
+        void OnEnable()
         {
             if (hpComponent && fightCharacter)
             {
                 hpComponent.AttachHpLE0CallBack((source, p_hpLost, hp) => fightCharacter.Die(source));
+            }
+        }
+
+        void OnDisable()
+        {
+            if (hpComponent && fightCharacter)
+            {
+                hpComponent.DetachHpLE0CallBack((source, p_hpLost, hp) => fightCharacter.Die(source));
             }
         }
     }

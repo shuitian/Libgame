@@ -36,6 +36,11 @@ namespace Libgame.Components
         {
             this.onHpLE0 -= onHpLE0;
         }
+
+        public void ClearHpLE0CallBack()
+        {
+            this.onHpLE0 = null;
+        }
         
         /// <summary>
         /// 无条件扣除相应生命值
@@ -50,7 +55,10 @@ namespace Libgame.Components
             hp -= p_hpLost;
             if (hp <= 0)
             {
-                onHpLE0?.Invoke(source, p_hpLost, hp);
+                if (onHpLE0 != null)
+                {
+                    onHpLE0(source, p_hpLost, hp);
+                }
             }
         }
 

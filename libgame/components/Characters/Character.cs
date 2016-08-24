@@ -112,7 +112,10 @@ namespace Libgame.Characters
             if (isDead == false)
             {
                 isDead = true;
-                onDie?.Invoke(p_killer);
+                if (onDie != null)
+                {
+                    onDie(p_killer);
+                }
                 p_killer.Kill(this);
             }
             return isDead;

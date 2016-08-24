@@ -2,13 +2,14 @@
 using System.Collections;
 using System.Collections.Generic ;
 using Libgame.Components;
+using Libgame.Bridge;
 
 namespace Libgame.Characters
 {
     /// <summary>
     /// 战斗人物
     /// </summary>
-    [RequireComponent(typeof(HpComponent))]
+    [RequireComponent(typeof(HpDieBridge))]
     //[RequireComponent(typeof(ElementsAffinityComponent))]
     public class FightCharacter : Character
     {

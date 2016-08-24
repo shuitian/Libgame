@@ -13,10 +13,7 @@ namespace Libgame.Components
         // Update is called once per frame
         void Update()
         {
-            if (CanMove())
-            {
-                Move();
-            }
+            Move();
         }
 
         /// <summary>
@@ -47,11 +44,11 @@ namespace Libgame.Components
         /// </summary>
         public virtual void Move()
         {
-            if (moveObject && moveDirect != Vector3.zero)
+            if (CanMove() && moveObject && moveDirect != Vector3.zero)
                 moveObject.transform.position += moveDirect.normalized * moveSpeed * Time.deltaTime;
         }
 
-        #region 移动方向
+#region 移动方向
         /// <summary>
         /// 移动方向，动态改变
         /// </summary>
@@ -75,9 +72,9 @@ namespace Libgame.Components
         {
             moveDirect = p_newMoveDirect;
         }
-        #endregion
+#endregion
 
-        #region 移动速度
+#region 移动速度
         /// <summary>
         /// 最大移动速度
         /// </summary>
@@ -166,7 +163,7 @@ namespace Libgame.Components
             this.moveSpeedAddedRate = p_moveSpeedAddedRate;
             return true;
         }
-        #endregion
+#endregion
 
         /// <summary>
         /// 显示组件的基本信息，override
