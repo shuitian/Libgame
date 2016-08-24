@@ -113,7 +113,7 @@ namespace Libgame.Components
         /// <summary>
         /// 基础最大生命值
         /// </summary>
-        static public float baseMaxHp = 100;
+        public float baseMaxHp = 100;
 
 
         /// <summary>
@@ -208,13 +208,29 @@ namespace Libgame.Components
             this.maxHpRate = p_maxHpRate;
             return true;
         }
-#endregion
-#region HP_RECOVER
 
+
+        /// <summary>
+        /// 设置最大生命值
+        /// </summary>
+        /// <param name="p_baseMaxHp">新的基础最大生命值</param>
+        /// <param name="p_maxHpAddedValue">新的基础最大生命值增加值</param>
+        /// <param name="p_maxHpRate">新的最大生命值百分比</param>
+        /// <returns>改变是否成功</returns>
+        public bool SetMaxHp(float p_baseMaxHp, float p_maxHpAddedValue, float p_maxHpRate)
+        {
+            this.baseMaxHp = p_baseMaxHp;
+            this.maxHpAddedValue = p_maxHpAddedValue;
+            this.maxHpRate = p_maxHpRate;
+            return true;
+        }
+#endregion
+
+#region HP_RECOVER
         /// <summary>
         /// 基础每秒生命恢复值
         /// </summary>
-        static public float baseHpRecover = 0;
+        public float baseHpRecover = 0;
 
         /// <summary>
         /// 基础每秒生命恢复值增加量，私有
@@ -293,6 +309,21 @@ namespace Libgame.Components
         }
 
         /// <summary>
+        /// 设置每秒生命恢复
+        /// </summary>
+        /// <param name="p_baseHpRecover">新的基础每秒生命恢复</param>
+        /// <param name="p_hpRecoverAddedValue">新的基础每秒生命恢复增加值</param>
+        /// <param name="p_hpRecoverRate">新的每秒生命恢复增加百分比</param>
+        /// <returns></returns>
+        public bool SetHpRecover(float p_baseHpRecover, float p_hpRecoverAddedValue, float p_hpRecoverRate)
+        {
+            this.baseHpRecover = p_baseHpRecover;
+            this.hpRecoverAddedValue = p_hpRecoverAddedValue;
+            this.hpRecoverRate = p_hpRecoverRate;
+            return true;
+        }
+
+        /// <summary>
         /// 协程，生命恢复
         /// </summary>
         /// <returns></returns>
@@ -306,11 +337,7 @@ namespace Libgame.Components
                 }
                 else if (hpRecover < 0)
                 {
-                    //TODO
-                    //涉及到BUFF的话，如果2个不同的角色，都在同一个角色身上添加了扣血BUFF
-                    //被添加的角色死亡，算谁的
-                    //TODO
-                    //在修改恢复或者生命值的时候，记录来源。
+                    //如果修改生命回复为负数，因为生命恢复而死亡，算自杀
                     LoseHp(null, -hpRecover * Time.deltaTime);
                 }
                 yield return 0;
@@ -344,9 +371,9 @@ namespace Libgame.Components
             MonoBehaviour.print(
                 "[" + gameObject + "] => "
                 + "hp: " + hp
-                + ", maxHp: " + maxHp + ", [static]baseMaxHp: " + baseMaxHp + ", maxHpAddedValue: " + maxHpAddedValue + ", maxHpRate: " + maxHpRate
+                + ", maxHp: " + maxHp + ", baseMaxHp: " + baseMaxHp + ", maxHpAddedValue: " + maxHpAddedValue + ", maxHpRate: " + maxHpRate
                 + ", [static]minMaxHp: " + minMaxHp + ", [static]maxMaxHp: " + maxMaxHp + ",\n"
-                + "hpRecover: " + hpRecover + ", [static]baseHpRecover: " + baseHpRecover + ", hpRecoverAddedValue: " + hpRecoverAddedValue + ", hpRecoverRate: " + hpRecoverRate);
+                + "hpRecover: " + hpRecover + ", baseHpRecover: " + baseHpRecover + ", hpRecoverAddedValue: " + hpRecoverAddedValue + ", hpRecoverRate: " + hpRecoverRate);
         }
     }
 }

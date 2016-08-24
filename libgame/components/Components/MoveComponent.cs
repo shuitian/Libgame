@@ -88,7 +88,7 @@ namespace Libgame.Components
         /// <summary>
         /// 基础移动速度
         /// </summary>
-        static public float baseMoveSpeed = 100;
+        public float baseMoveSpeed = 100;
 
         /// <summary>
         /// 基础移动速度增加值，私有
@@ -148,7 +148,7 @@ namespace Libgame.Components
         /// <returns>设置是否成功</returns>
         public bool AddMoveSpeed(float p_moveSpeedAddedValue, float p_moveSpeedAddedRate)
         {
-            return SetMoveSpeed(this.moveSpeedAddedValue + p_moveSpeedAddedValue, this.moveSpeedAddedRate + p_moveSpeedAddedRate);
+            return SetMoveSpeed(this.baseMoveSpeed, this.moveSpeedAddedValue + p_moveSpeedAddedValue, this.moveSpeedAddedRate + p_moveSpeedAddedRate);
         }
 
         /// <summary>
@@ -157,8 +157,9 @@ namespace Libgame.Components
         /// <param name="p_moveSpeedAddedValue">新的基础移动速度增加值</param>
         /// <param name="p_moveSpeedAddedRate">新的移动速度增加百分比</param>
         /// <returns>设置是否成功</returns>
-        public bool SetMoveSpeed(float p_moveSpeedAddedValue, float p_moveSpeedAddedRate)
+        public bool SetMoveSpeed(float p_baseMoveSpeed, float p_moveSpeedAddedValue, float p_moveSpeedAddedRate)
         {
+            this.baseMoveSpeed = p_baseMoveSpeed;
             this.moveSpeedAddedValue = p_moveSpeedAddedValue;
             this.moveSpeedAddedRate = p_moveSpeedAddedRate;
             return true;
@@ -174,7 +175,7 @@ namespace Libgame.Components
             MonoBehaviour.print(
                 "[" + gameObject + "] => "
                 + "canMove: " + canMove + ", moveDirect: " + moveDirect + ", moveSpeed: " + moveSpeed
-                + ", [static]baseMoveSpeed: " + baseMoveSpeed + ", moveSpeedAddedValue: " + moveSpeedAddedValue + ", moveSpeedAddedRate: " + moveSpeedAddedRate
+                + ", baseMoveSpeed: " + baseMoveSpeed + ", moveSpeedAddedValue: " + moveSpeedAddedValue + ", moveSpeedAddedRate: " + moveSpeedAddedRate
                 + ", [static]maxMoveSpeed: " + maxMoveSpeed + ", [static]minMoveSpeed: " + minMoveSpeed);
         }
     }
