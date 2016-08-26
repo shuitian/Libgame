@@ -50,10 +50,11 @@ namespace Libgame.Components
             armorAddedValueList = _armorAddedValueList;
         }
     }
+
     /// <summary>
     /// 护甲组件
     /// </summary>
-    public class ArmorComponent : CharacterComponent
+    public class BaseNoArmorComponent : CharacterComponent
     {
         /// <summary>
         /// 护甲类
@@ -112,9 +113,64 @@ namespace Libgame.Components
         /// <returns>抵挡后的伤害</returns>
         public virtual Damage CalculateDamage(Damage damage)
         {
-            for(int i = 0; i < damage.realDamages.Length; i++)
+            return damage;
+        }
+    }
+
+    public class HyperbolaArmorComponent : BaseNoArmorComponent
+    {
+        /// <summary>
+        /// 伤害修正数值
+        /// </summary>
+        public float damageModifiedValue = 100F;
+
+        /// <summary>
+        /// 最小护甲值
+        /// </summary>
+        public float minArmor = -50F;
+
+        /// <summary>
+        /// 最大护甲值
+        /// </summary>
+        public float maxArmor = 900F;
+
+        /// <summary>
+        /// 计算护甲抵挡后的伤害,override
+        /// </summary>
+        /// <param name="damage">抵挡前的伤害</param>
+        /// <returns>抵挡后的伤害</returns>
+        public override Damage CalculateDamage(Damage damage)
+        {
+            for (int i = 0; i < damage.realDamages.Length; i++)
             {
-                damage.realDamages[i] *= (100F) / (100 + armorList[i]);
+                damage.realDamages[i] *= (damageModifiedValue) / (damageModifiedValue + Mathf.Max(Mathf.Min(armorList[i], maxArmor), minArmor));
+            }
+            return damage;
+        }
+    }
+
+    public class LinearArmorComponent : BaseNoArmorComponent
+    {
+        /// <summary>
+        /// 最小护甲值
+        /// </summary>
+        public float minArmor = -50F;
+
+        /// <summary>
+        /// 最大护甲值
+        /// </summary>
+        public float maxArmor = 900F;
+
+        /// <summary>
+        /// 计算护甲抵挡后的伤害,override
+        /// </summary>
+        /// <param name="damage">抵挡前的伤害</param>
+        /// <returns>抵挡后的伤害</returns>
+        public override Damage CalculateDamage(Damage damage)
+        {
+            for (int i = 0; i < damage.realDamages.Length; i++)
+            {
+                damage.realDamages[i] -= Mathf.Max(Mathf.Min(armorList[i], maxArmor), minArmor);
             }
             return damage;
         }

@@ -10,7 +10,8 @@ namespace Libgame.Characters
     /// 战斗人物
     /// </summary>
     [RequireComponent(typeof(HpDieBridge))]
-    //[RequireComponent(typeof(ElementsAffinityComponent))]
+    [RequireComponent(typeof(BaseNoArmorComponent))]
+    [RequireComponent(typeof(BaseAttackComponent))]
     public class FightCharacter : Character
     {
 
@@ -35,6 +36,54 @@ namespace Libgame.Characters
                     _hpComponent = gameObject.AddComponent<HpComponent>();
                 }
                 return _hpComponent;
+            }
+        }
+
+        /// <summary>
+        /// 护甲值组件，私有
+        /// </summary>
+        protected BaseNoArmorComponent _baseNoArmorComponent;
+
+        /// <summary>
+        /// 护甲值组件
+        /// </summary>
+        public BaseNoArmorComponent baseNoArmorComponent
+        {
+            get
+            {
+                if (_baseNoArmorComponent == null)
+                {
+                    _baseNoArmorComponent = GetComponent<BaseNoArmorComponent>();
+                }
+                if (_baseNoArmorComponent == null)
+                {
+                    _baseNoArmorComponent = gameObject.AddComponent<BaseNoArmorComponent>();
+                }
+                return _baseNoArmorComponent;
+            }
+        }
+
+        /// <summary>
+        /// 攻击组件，私有
+        /// </summary>
+        protected BaseAttackComponent _baseAttackComponent;
+
+        /// <summary>
+        /// 攻击组件
+        /// </summary>
+        public BaseAttackComponent baseAttackComponent
+        {
+            get
+            {
+                if (_baseAttackComponent == null)
+                {
+                    _baseAttackComponent = GetComponent<BaseAttackComponent>();
+                }
+                if (_baseAttackComponent == null)
+                {
+                    _baseAttackComponent = gameObject.AddComponent<BaseAttackComponent>();
+                }
+                return _baseAttackComponent;
             }
         }
 
@@ -92,5 +141,21 @@ namespace Libgame.Characters
         //    skill.SetDamageByIntensity(elementIntensityAndDefenceComponent);
         //    skill.Release();
         //}
+    }
+
+    /// <summary>
+    /// 双曲线护甲战斗人物
+    /// </summary>
+    [RequireComponent(typeof(HyperbolaArmorComponent))]
+    public class HArmorFightCharacter : FightCharacter
+    {
+    }
+
+    /// <summary>
+    /// 线性护甲战斗人物
+    /// </summary>
+    [RequireComponent(typeof(LinearArmorComponent))]
+    public class LArmorFightCharacter : FightCharacter
+    {
     }
 }
