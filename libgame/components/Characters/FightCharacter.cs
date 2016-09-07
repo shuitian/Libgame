@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic ;
 using Libgame.Components;
 using Libgame.Bridge;
+using Libgame.Damages;
 
 namespace Libgame.Characters
 {
@@ -42,51 +43,61 @@ namespace Libgame.Characters
         /// <summary>
         /// 护甲值组件，私有
         /// </summary>
-        protected BaseNoArmorComponent _baseNoArmorComponent;
+        protected BaseNoArmorComponent _armorComponent;
 
         /// <summary>
         /// 护甲值组件
         /// </summary>
-        public BaseNoArmorComponent baseNoArmorComponent
+        public BaseNoArmorComponent armorComponent
         {
             get
             {
-                if (_baseNoArmorComponent == null)
+                if (_armorComponent == null)
                 {
-                    _baseNoArmorComponent = GetComponent<BaseNoArmorComponent>();
+                    _armorComponent = GetComponent<BaseNoArmorComponent>();
                 }
-                if (_baseNoArmorComponent == null)
+                if (_armorComponent == null)
                 {
-                    _baseNoArmorComponent = gameObject.AddComponent<BaseNoArmorComponent>();
+                    _armorComponent = gameObject.AddComponent<BaseNoArmorComponent>();
                 }
-                return _baseNoArmorComponent;
+                return _armorComponent;
             }
         }
 
         /// <summary>
         /// 攻击组件，私有
         /// </summary>
-        protected BaseAttackComponent _baseAttackComponent;
+        protected BaseAttackComponent _attackComponent;
 
         /// <summary>
         /// 攻击组件
         /// </summary>
-        public BaseAttackComponent baseAttackComponent
+        public BaseAttackComponent attackComponent
         {
             get
             {
-                if (_baseAttackComponent == null)
+                if (_attackComponent == null)
                 {
-                    _baseAttackComponent = GetComponent<BaseAttackComponent>();
+                    _attackComponent = GetComponent<BaseAttackComponent>();
                 }
-                if (_baseAttackComponent == null)
+                if (_attackComponent == null)
                 {
-                    _baseAttackComponent = gameObject.AddComponent<BaseAttackComponent>();
+                    _attackComponent = gameObject.AddComponent<BaseAttackComponent>();
                 }
-                return _baseAttackComponent;
+                return _attackComponent;
             }
         }
 
+        /// <summary>
+        /// 受到伤害
+        /// </summary>
+        /// <param name="damage">受到的伤害</param>
+        public virtual void TakeDamages(Damage damage)
+        {
+            BaseNoArmorComponent armor = GetComponent<BaseNoArmorComponent>();
+            Damage newDamage = armor.CalculateDamage(damage);
+            this.hpComponent.LosePoint(newDamage.source, newDamage.realTotalDamage);
+        }
         ///// <summary>
         ///// TODO
         /////     身上所穿得装备

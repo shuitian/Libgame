@@ -49,7 +49,7 @@ namespace Libgame.Bridge
         {
             if (hpComponent && fightCharacter)
             {
-                hpComponent.AttachHpLE0CallBack((source, p_hpLost, hp) => fightCharacter.Die(source));
+                hpComponent.AttachPointLE0CallBack((source, p_hpLost, hp) => fightCharacter.Die(source));
             }
         }
 
@@ -57,7 +57,7 @@ namespace Libgame.Bridge
         {
             if (hpComponent && fightCharacter)
             {
-                hpComponent.DetachHpLE0CallBack((source, p_hpLost, hp) => fightCharacter.Die(source));
+                hpComponent.DetachPointLE0CallBack((source, p_hpLost, hp) => fightCharacter.Die(source));
             }
         }
     }

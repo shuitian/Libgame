@@ -44,6 +44,8 @@
   <ItemGroup>
     <Compile Include="Components\ArmorComponent.cs" />
     <Compile Include="Components\AttackComponent.cs" />
+    <Compile Include="Components\ResourceComponent.cs" />
+    <Compile Include="Components\PointComponent.cs" />
     <Compile Include="Damages\Damage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BaseComponent.cs" />

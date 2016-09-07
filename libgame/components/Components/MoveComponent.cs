@@ -78,12 +78,12 @@ namespace Libgame.Components
         /// <summary>
         /// 最大移动速度
         /// </summary>
-        static public float maxMoveSpeed = 1000;
+        public float maxMoveSpeed = 1000;
 
         /// <summary>
         /// 最小移动速度
         /// </summary>
-        static public float minMoveSpeed = 0;
+        public float minMoveSpeed = 0;
 
         /// <summary>
         /// 基础移动速度
@@ -176,7 +176,7 @@ namespace Libgame.Components
                 "[" + gameObject + "] => "
                 + "canMove: " + canMove + ", moveDirect: " + moveDirect + ", moveSpeed: " + moveSpeed
                 + ", baseMoveSpeed: " + baseMoveSpeed + ", moveSpeedAddedValue: " + moveSpeedAddedValue + ", moveSpeedAddedRate: " + moveSpeedAddedRate
-                + ", [static]maxMoveSpeed: " + maxMoveSpeed + ", [static]minMoveSpeed: " + minMoveSpeed);
+                + ", maxMoveSpeed: " + maxMoveSpeed + ", minMoveSpeed: " + minMoveSpeed);
         }
     }
 
