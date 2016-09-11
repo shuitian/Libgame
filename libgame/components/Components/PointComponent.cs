@@ -323,6 +323,11 @@ namespace Libgame.Components
             return true;
         }
 
+        public virtual bool CanRecover()
+        {
+            return true;
+        }
+
         /// <summary>
         /// 协程，Point恢复
         /// </summary>
@@ -331,14 +336,17 @@ namespace Libgame.Components
         {
             while (true)
             {
-                if (pointRecover > 0)
+                if (CanRecover())
                 {
-                    AddPoint(null, pointRecover * Time.deltaTime);
-                }
-                else if (pointRecover < 0)
-                {
-                    //如果修改Point回复为负数，因为Point恢复而死亡，算自杀
-                    LosePoint(null, -pointRecover * Time.deltaTime);
+                    if (pointRecover > 0)
+                    {
+                        AddPoint(null, pointRecover * Time.deltaTime);
+                    }
+                    else if (pointRecover < 0)
+                    {
+                        //如果修改Point回复为负数，因为Point恢复而死亡，算自杀
+                        LosePoint(null, -pointRecover * Time.deltaTime);
+                    }
                 }
                 yield return 0;
             }
