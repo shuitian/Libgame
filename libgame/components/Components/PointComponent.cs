@@ -20,10 +20,48 @@ namespace Libgame.Components
             StopAllCoroutines();
         }
 
+        private float _point;
         /// <summary>
         /// 当前Point
         /// </summary>
-        protected float point;
+        public float point
+        {
+            get
+            {
+                return _point;
+            }
+            protected set
+            {
+                if(_point!= value)
+                {
+                    float _value = _point;
+                    _point = value;
+                    if (onPointChange != null)
+                    {
+                        onPointChange(_value, value);
+                    }
+                }
+            }
+        }
+
+        #region 变化回调
+        Action<float, float> onPointChange;
+
+        public void AttachPointChangeCallBack(Action<float, float> onPointChange)
+        {
+            this.onPointChange += onPointChange;
+        }
+
+        public void DetachPointChangeCallBack(Action<float, float> onPointChange)
+        {
+            this.onPointChange -= onPointChange;
+        }
+
+        public void ClearPointChangeCallBack()
+        {
+            this.onPointChange = null;
+        }
+        #endregion
 
         #region 0值回调
         Action<Character, float, float> onPointLE0;
@@ -110,6 +148,14 @@ namespace Libgame.Components
             this.point = 0;
         }
 
+        /// <summary>
+        /// 设置Point
+        /// </summary>
+        public void SetPoint(float point)
+        {
+            this.point = point;
+        }
+
         #region MAX_POINT
         /// <summary>
         /// 基础最大Point
@@ -181,7 +227,7 @@ namespace Libgame.Components
         /// <summary>
         /// 重设Point为最大Point
         /// </summary>
-        protected void ResetPoint()
+        public void ResetPoint()
         {
             point = maxPoint;
         }
@@ -192,7 +238,7 @@ namespace Libgame.Components
         /// <param name="p_maxPointAddedValue">增加的基础最大Point增加值</param>
         /// <param name="p_maxPointRate">增加的最大Point百分比</param>
         /// <returns></returns>
-        protected bool AddMaxPoint(float p_maxPointAddedValue, float p_maxPointRate)
+        public bool AddMaxPoint(float p_maxPointAddedValue, float p_maxPointRate)
         {
             return ChangeMaxPoint(this.maxPointAddedValue + p_maxPointAddedValue, this.maxPointRate + p_maxPointRate);
         }
@@ -203,7 +249,7 @@ namespace Libgame.Components
         /// <param name="p_maxPointAddedValue">新的基础最大Point增加值</param>
         /// <param name="p_maxPointRate">新的最大Point百分比</param>
         /// <returns>改变是否成功</returns>
-        protected bool ChangeMaxPoint(float p_maxPointAddedValue, float p_maxPointRate)
+        public bool ChangeMaxPoint(float p_maxPointAddedValue, float p_maxPointRate)
         {
             this.maxPointAddedValue = p_maxPointAddedValue;
             this.maxPointRate = p_maxPointRate;
@@ -217,7 +263,7 @@ namespace Libgame.Components
         /// <param name="p_maxPointAddedValue">新的基础最大Point增加值</param>
         /// <param name="p_maxPointRate">新的最大Point百分比</param>
         /// <returns>改变是否成功</returns>
-        protected bool SetMaxPoint(float p_baseMaxPoint, float p_maxPointAddedValue, float p_maxPointRate)
+        public  bool SetMaxPoint(float p_baseMaxPoint, float p_maxPointAddedValue, float p_maxPointRate)
         {
             this.baseMaxPoint = p_baseMaxPoint;
             this.maxPointAddedValue = p_maxPointAddedValue;
@@ -290,7 +336,7 @@ namespace Libgame.Components
         /// <param name="p_pointRecoverAddedValue">增加的每秒Point恢复增加值</param>
         /// <param name="p_pointRecoverRate">增加的每秒Point恢复百分比</param>
         /// <returns>是否增加成功</returns>
-        protected bool AddPointRecover(float p_pointRecoverAddedValue, float p_pointRecoverRate)
+        public bool AddPointRecover(float p_pointRecoverAddedValue, float p_pointRecoverRate)
         {
             return ChangePointRecover(this.pointRecoverAddedValue + p_pointRecoverAddedValue, this.pointRecoverRate + p_pointRecoverRate);
         }
@@ -301,7 +347,7 @@ namespace Libgame.Components
         /// <param name="p_pointRecoverAddedValue">新的基础每秒Point恢复增加值</param>
         /// <param name="p_pointRecoverRate">新的每秒Point恢复增加百分比</param>
         /// <returns>是否改变成功</returns>
-        protected bool ChangePointRecover(float p_pointRecoverAddedValue, float p_pointRecoverRate)
+        public bool ChangePointRecover(float p_pointRecoverAddedValue, float p_pointRecoverRate)
         {
             this.pointRecoverAddedValue = p_pointRecoverAddedValue;
             this.pointRecoverRate = p_pointRecoverRate;
@@ -315,7 +361,7 @@ namespace Libgame.Components
         /// <param name="p_pointRecoverAddedValue">新的基础每秒Point恢复增加值</param>
         /// <param name="p_pointRecoverRate">新的每秒Point恢复增加百分比</param>
         /// <returns></returns>
-        protected bool SetPointRecover(float p_basePointRecover, float p_pointRecoverAddedValue, float p_pointRecoverRate)
+        public bool SetPointRecover(float p_basePointRecover, float p_pointRecoverAddedValue, float p_pointRecoverRate)
         {
             this.basePointRecover = p_basePointRecover;
             this.pointRecoverAddedValue = p_pointRecoverAddedValue;
@@ -355,7 +401,7 @@ namespace Libgame.Components
         /// <summary>
         /// 暂停Point恢复协程
         /// </summary>
-        protected void PausePointRecover()
+        public void PausePointRecover()
         {
             StopAllCoroutines();
         }
@@ -363,7 +409,7 @@ namespace Libgame.Components
         /// <summary>
         /// 重新开始Point恢复协程
         /// </summary>
-        protected void ResumePointRecover()
+        public void ResumePointRecover()
         {
             PausePointRecover();
             StartCoroutine(RecoverPointPerSecond());

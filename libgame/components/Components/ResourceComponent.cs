@@ -9,6 +9,7 @@ namespace Libgame.Components
     {
         public int resourceId;
         public string resourceName;
+        public int ownAtFirst;
     }
 
     public class SingleNoRecoverResourceComponent : SingleResourceComponent
@@ -48,6 +49,53 @@ namespace Libgame.Components
                 return singleResourceComponentDic[id];
             }
             return null;
+        }
+
+        public bool CanAford(Dictionary<int, float> resources)
+        {
+            foreach(var item in resources)
+            {
+                SingleResourceComponent singleResourceComponent = GetSingleResourceComponentById(item.Key);
+                if(singleResourceComponent == null)
+                {
+                    return false;
+                }
+                if (singleResourceComponent.point < item.Value)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public bool TryToAford(Dictionary<int, float> resources)
+        {
+            if (CanAford(resources))
+            {
+                foreach (var item in resources)
+                {
+                    SingleResourceComponent singleResourceComponent = GetSingleResourceComponentById(item.Key);
+                    singleResourceComponent.LosePoint(null, item.Value);
+                }
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public void SetCurrentResource(Dictionary<int, float> resources)
+        {
+            foreach (var item in resources)
+            {
+                SingleResourceComponent singleResourceComponent = GetSingleResourceComponentById(item.Key);
+                if (singleResourceComponent == null)
+                {
+                    continue;
+                }
+                singleResourceComponent.SetPoint(item.Value);
+            }
         }
     }
 }
