@@ -147,6 +147,16 @@ namespace Libgame.Components
             }
             return damage;
         }
+
+        public static float[] CalculateDamageDerates(float damageModifiedValue, float[] armorList)
+        {
+            float[] derates = new float[armorList.Length];
+            for(int i = 0; i < armorList.Length; i++)
+            {
+                derates[i] = armorList[i] / (armorList[i] + damageModifiedValue);
+            }
+            return derates;
+        }
     }
 
     public class LinearArmorComponent : BaseNoArmorComponent

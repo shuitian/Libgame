@@ -55,7 +55,12 @@ namespace Libgame.Components
                 return (baseAttackInterval * timeModifiedValue) / (timeModifiedValue + attackSpeed);
             }
         }
-        
+
+        static public float GetAttackInterval(float _baseAttackInterval, float _timeModifiedValue, float _attackSpeed)
+        {
+            return (_baseAttackInterval * _timeModifiedValue) / (_timeModifiedValue + _attackSpeed);
+        }
+
         /// <summary>
         /// 攻击速度，private
         /// </summary>
